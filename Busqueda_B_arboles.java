@@ -1,6 +1,6 @@
-Implementa aquí la operación de búsqueda. 
+/*Implementa aquí la operación de búsqueda. 
 Pueden modificar la extensión del documento para que se ajuste al lenguaje de su elección y comentar estas instrucciones.
-Mi código esta en java: 
+Mi código esta en java: */
 public class ArbolB {
     class Nodo {
         int[] key;     // se guardan las llaves
