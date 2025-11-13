@@ -88,7 +88,7 @@ public class ArbolBInsercion {
             key[i] = y.key[t - 1];
             n = n + 1;
 
-            System.out.println("Dividido un nodo, subiendo la llave " + key[i]);
+            System.out.println("Dividido un nodo, subiendo la llave " + y.key[t-1]);
         }
     }
 
@@ -101,42 +101,26 @@ public class ArbolBInsercion {
         raiz = new Nodo(t, true);
     }
 
-    // función pública para insertar una nueva llave
     public void insertar(int k) {
         Nodo r = raiz;
 
         // si la raíz está llena, se divide
         if (r.n == 2 * t - 1) {
             Nodo s = new Nodo(t, false);
-            raiz = s;
             s.hijos[0] = r;
             s.dividirHijo(0, r);
-            s.insertarNoLleno(k);
+            int i = 0;
+            if (s.key[0] < k) {
+                i++;
+            }
+            s.hijos[i].insertarNoLleno(k);
+            raiz = s;
             System.out.println("La raíz estaba llena, se dividió antes de insertar " + k);
         } else {
             r.insertarNoLleno(k);
         }
     }
-
-    // método para mostrar el árbol (simplemente imprime las llaves)
-    public void mostrar() {
-        mostrarRec(raiz, 0);
-    }
-
-    private void mostrarRec(Nodo nodo, int nivel) {
-        System.out.print("Nivel " + nivel + ": ");
-        for (int i = 0; i < nodo.n; i++) {
-            System.out.print(nodo.key[i] + " ");
-        }
-        System.out.println();
-        if (!nodo.leaf) {
-            for (int i = 0; i <= nodo.n; i++) {
-                mostrarRec(nodo.hijos[i], nivel + 1);
-            }
-        }
-    }
-
-    // main para probarlo
+   
     public static void main(String[] args) {
         ArbolBInsercion arbol = new ArbolBInsercion(3); // grado 3
 
@@ -149,8 +133,5 @@ public class ArbolBInsercion {
         arbol.insertar(30);
         arbol.insertar(7);
         arbol.insertar(17);
-
-        System.out.println("\nEstructura final del árbol:");
-        arbol.mostrar();
     }
 }
