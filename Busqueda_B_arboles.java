@@ -1,15 +1,14 @@
 /*Implementa aquí la operación de búsqueda. 
 Pueden modificar la extensión del documento para que se ajuste al lenguaje de su elección y comentar estas instrucciones.
 Mi código esta en java: */
-public class ArbolB {
+public class ArbolBBusqueda {
     class Nodo {
-        int[] key;     // se guardan las llaves
-        Nodo[] hijos;     // aquí van los hijos
-        int n;            // cuántas key tiene este nodo
-        boolean leaf;     // si es hoja o no
-        int t;            // el grado mínimo del árbol
+        int[] key;      // aquí se guardan las llaves
+        Nodo[] hijos;   // los hijos del nodo
+        int n;          // cuántas llaves tiene el nodo
+        boolean leaf;   // si es hoja o no
+        int t;          // grado mínimo del árbol
 
-        // constructor del nodo
         Nodo(int t, boolean leaf) {
             this.t = t;
             this.leaf = leaf;
@@ -18,41 +17,33 @@ public class ArbolB {
             this.n = 0;
         }
 
-        // función para buscar una llave (key) en el nodo
+        // función para buscar una llave (key)
         Nodo buscar(int k) {
             int i = 0;
             while (i < n && k > key[i]) {
                 i++;
             }
-
-            // si encontramos la llave, la regresamos
             if (i < n && key[i] == k) {
                 System.out.println("Encontrado " + k + " en este nodo.");
                 return this;
             }
-
-            // si es hoja, ya no hay a dónde ir, no está la llave
             if (leaf) {
                 System.out.println("No se encontró la llave " + k + " (llegamos a una hoja).");
                 return null;
             }
-
-            // si no es leaf, seguimos buscando en el hijo correspondiente
             System.out.println("Bajando al hijo número " + i + " para seguir buscando...");
             return hijos[i].buscar(k);
         }
     }
 
-    Nodo raiz;  // raíz del árbol
-    int t;      // grado mínimo
+    Nodo raiz;
+    int t;
 
-    // constructor del árbol
-    public ArbolB(int t) {
+    public ArbolBBusqueda(int t) {
         this.t = t;
         raiz = new Nodo(t, true);
     }
 
-    // método para iniciar la búsqueda desde la raíz
     public void buscar(int k) {
         if (raiz == null) {
             System.out.println("El árbol está vacío :(");
@@ -67,7 +58,7 @@ public class ArbolB {
     }
 
     public static void main(String[] args) {
-        ArbolB arbol = new ArbolB(3); // grado 3, por ejemplo
+        ArbolBBusqueda arbol = new ArbolBBusqueda(3);
 
         // metemos algunas key a mano para probar
         arbol.raiz.key[0] = 10;
@@ -76,7 +67,7 @@ public class ArbolB {
         arbol.raiz.n = 3;
 
         // probamos buscar algunas llaves (key)
-        arbol.buscar(20);  // debería encontrarlo
-        arbol.buscar(15);  // no debería estar
+        arbol.buscar(20);
+        arbol.buscar(15);
     }
 }
